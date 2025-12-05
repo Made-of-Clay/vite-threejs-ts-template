@@ -52,3 +52,21 @@ Run build
 ```bash
 pnpm preview
 ```
+
+## CICD Setup
+
+Ensure your GitHub repo exists before starting.
+
+### Firebase
+
+Firebase is my current static hosting provider.
+
+- Create a site under the playground project.
+- run `firebase-tools init hosting:github` and follow the prompts
+  - might run `npm config get prefix` to find the bin if PATH isn't configured correctly
+- Ensure firebase.json `hosting.site` is entered correctly
+
+### GitHub Actions
+
+- Ensure project builds without error/lint (this breaks/stops builds).
+- Push files to remote and what actions for a successful build/deployment.
