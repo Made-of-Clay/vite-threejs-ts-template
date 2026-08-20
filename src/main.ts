@@ -1,10 +1,10 @@
 import {
-    BoxGeometry,
-    LoadingManager,
-    Mesh,
-    MeshLambertMaterial,
-    PCFSoftShadowMap,
-    WebGLRenderer,
+  BoxGeometry,
+  LoadingManager,
+  Mesh,
+  MeshLambertMaterial,
+  PCFSoftShadowMap,
+  WebGLRenderer,
 } from 'three';
 import Stats from 'stats.js';
 import './style.css';
@@ -21,17 +21,25 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = PCFSoftShadowMap;
 const scene = getScene();
 
-const loadingManager = new LoadingManager(console.log, console.log, console.error)
+/*
+-- Example Usage --
+const loadingManager = getLoadingManager();
+const cheese: Promise<GLTF> = new Promise((resolve, reject) => {
+    const loader = new GLTFLoader(loadingManager);
+    loader.load('/models/cheese.glb', resolve, undefined, reject);
+});
+cheese.then((gltf) => scene.add(gltf.scene)).catch(console.error);
+*/
 
 addLights();
 
 // Dummy Object
 // TODO remove this object
 scene.add(
-    new Mesh(
-        new BoxGeometry(1, 1, 1),
-        new MeshLambertMaterial({ color: 'white' }),
-    ),
+  new Mesh(
+    new BoxGeometry(1, 1, 1),
+    new MeshLambertMaterial({ color: 'white' }),
+  ),
 );
 
 const camera = new ProjectCamera(canvas);
@@ -44,14 +52,14 @@ const stats = new Stats();
 document.body.appendChild(stats.dom);
 
 function tick() {
-    requestAnimationFrame(tick);
+  requestAnimationFrame(tick);
 
-    stats.begin();
+  stats.begin();
 
-    camera.tick(renderer);
+  camera.tick(renderer);
 
-    renderer.render(scene, camera.instance);
-    stats.end();
+  renderer.render(scene, camera.instance);
+  stats.end();
 }
 
 tick();
