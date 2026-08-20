@@ -1,7 +1,7 @@
 import {
   BoxGeometry,
-  LoadingManager,
   Mesh,
+  Timer,
   MeshLambertMaterial,
   PCFSoftShadowMap,
   WebGLRenderer,
@@ -51,10 +51,17 @@ addHelpers();
 const stats = new Stats();
 document.body.appendChild(stats.dom);
 
-function tick() {
+const timer = new Timer();
+timer.connect(document);
+
+function tick(timestamp: number) {
   requestAnimationFrame(tick);
 
   stats.begin();
+
+  timer.update(timestamp);
+  const delta = timer.getDelta();
+  console.log('delta', delta);
 
   camera.tick(renderer);
 
@@ -62,4 +69,4 @@ function tick() {
   stats.end();
 }
 
-tick();
+tick(0);
